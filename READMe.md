@@ -190,7 +190,7 @@ greeting
 
 nested list create list inside of list
 
-###Chapter 4 
+###Chapter 4
 
 ### links
 
@@ -235,4 +235,63 @@ header will look like
 
 &lt;h2 id-"interlude"&gt;Interlude&lt;h2&gt;
 
-#### linking to specific part of another page
+### Chapter 5
+
+#### importing image
+
+&lt;img src-"where to find image"alt-"text
+
+ description"title-"additional info about image" /&gt;
+
+#### height and width of images
+
+inside img
+
+example width="600" height="450"
+
+#### placement for images
+
+before paragraph- new paragraph starts on new line after image
+
+inside start of paragraph- first row of text indents to fit image
+
+middle of a paragraph- image is between word it was place in writing
+
+#### aligning
+
+inside img align="left" or align="right"
+
+align="top" align="middle" align="bottom"
+
+###Three rules for images
+
+1.save img in right format (jpeg,gif,png)
+
+2.save at right size
+
+3.use correct resolution
+
+colors use jpeg
+
+few colors or large area of same colors use gif or png
+
+72ppi-resoltion
+
+
+### Chapter 6
+
+table open
+
+tr (row) open
+ column name = th scope-"col"name"
+td (cell in row)open close
+
+tr close
+
+tr open
+
+td open close
+
+tr close
+
+table close
