@@ -160,9 +160,21 @@ s- no longer relevant, prices line through center
 
 ol - ordered list use numbers
 
+1.
+
+2.
+
+3.
+
 li - inside ol opening and closing per item in list
 
 ul - unordered list use bullets
+
+*
+
+*
+
+*
 
 li - use inside ul
 
@@ -170,6 +182,55 @@ dl - definition list
 
 dt - term being defined
 
+hello
+
 dd - definition of term
 
+greeting
+
 nested list create list inside of list
+
+### links
+
+a element, able to click on anything between open and closing of a
+
+
+example
+
+&lt;a href="http://www.imbd.com"&gt;IMBD&lt;/a &gt;
+
+
+#### links to different website, use absolute url - full web site address
+
+href=full url
+
+
+#### links to other pages on same site, use relative URL
+
+href= name of file if in same folder
+
+#### email:
+
+ href-"mailto:email.org" email
+
+#### opening links in a new window
+
+*target
+
+a href -"http://www.imbd.com" target -"_blank"
+
+#### linking to specific part of same page
+
+identify in the headings where these links will be within the page
+
+example
+
+link will look like
+
+&lt;a href-"#interlude"&gt;Interlude&lt;/a&gt;
+
+header will look like
+
+&lt;h2 id-"interlude"&gt;Interlude&lt;h2&gt;
+
+#### linking to specific part of another page
