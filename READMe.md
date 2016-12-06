@@ -155,3 +155,21 @@ ins - underlines
 del- crossed out
 
 s- no longer relevant, prices line through center
+
+### Chapter 3
+
+ol - ordered list use numbers
+
+li - inside ol opening and closing per item in list
+
+ul - unordered list use bullets
+
+li - use inside ul
+
+dl - definition list
+
+dt - term being defined
+
+dd - definition of term
+
+nested list create list inside of list
