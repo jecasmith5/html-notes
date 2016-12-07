@@ -280,6 +280,12 @@ few colors or large area of same colors use gif or png
 
 ### Chapter 6
 
+row by row
+
+td or th is number of cells in row
+
+use row span or colspan to span across more than one row
+
 table open
 
 tr (row) open
@@ -295,3 +301,135 @@ td open close
 tr close
 
 table close
+
+### Chapter 7
+
+allows you to collect information from visitors of site
+
+search bars, shopping, mailing list, ect
+
+#### Form controls
+
+|Form Controls | Use |
+|--------------|:-----:|
+|Text Input|single line of text(emails or names)|
+|Password Input|single line, masked characters(**)|
+|Text Area|Multi-line text box for messages or comments|
+|Radio Buttons|User must select one option(bubble)|
+|Checkboxes|User can select or deselect one or more options|
+|Drop-down Boxes|User must pick from list|
+|Submit Button|Submit data from form to another webpage|
+|Image button|colored submit button|
+|File Upload| allows users to upload files to website|
+
+Once filled and submitted forms go to a server along with values entered server sends back page
+
+#### Form Structure
+
+&lt;form action="URL for the page server will recieve"method="get"&gt;
+
+  &lt;p&gt;USERNAME:
+
+    &lt;input type="txt" name="username" size ="15" maxlength="30"/&gt;
+
+  &lt;/p&gt;
+  &lt;p&gt;Password:
+
+  &lt;input type="password" name="password"size="15"maxlength="30"/&gt;
+
+  &lt;/p&gt;
+
+&lt;/form&gt;
+
+methods:
+
+get: short forms (search boxes just receiving data not adding to database)
+
+post: allows user to upload file, very long, sensitive data(password), adds or deletes information
+
+&lt;textarea name="comments" cols="20" rows="4"&gt;
+
+#### input:
+
+*type=text
+
+name, size, maxlength
+
+*type=password
+
+name, size, maxlength
+
+*type=Radio
+
+name, value, checked
+
+*type=Checkbox
+
+name,value,checked
+
+*type=file
+
+name
+
+*type=submit
+
+name, value,
+
+*type=image
+
+src,width,height
+
+----------------
+*multiline
+
+textarea name="" cols="" rows=""
+
+*dropdown list
+
+&lt;select name=""&gt;
+
+ &lt;option value=""&gt;Displayed Name&lt;/option&gt;
+
+&lt;/select&gt;
+
+
+### buttons and hidden Controls
+
+appearence of Buttons
+
+combine text and images between opening and closing button Tags
+
+hidden
+
+&lt;input type=hidden name="bookmark" value="lyrics"
+/&gt;
+
+### labeling form Controls
+
+group form elements
+
+fieldset
+
+[] &lt;-- basically puts text in table that looks like this
+
+legend labels box^--
+
+form validation
+
+sends errors if form isnt correctly filled
+
+*date
+
+input type= "date" name="depart"
+
+*email and url input
+
+input type="email" name=email
+
+input type=url"name="website"
+
+*search
+
+type=search name="search"
+
+###Chapter 8
