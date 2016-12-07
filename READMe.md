@@ -433,3 +433,82 @@ input type=url"name="website"
 type=search name="search"
 
 ###Chapter 8
+
+HTML 4-1997
+
+XHTML 1.0-2000
+
+HTML5-2000 <!DOCTYPE html>
+
+*comments
+
+<!--comments go here-->
+
+*id Attributes
+
+global Attributes used to identify specific paragraphs in html
+
+*class Attributes
+
+*block elements
+
+h1
+
+p
+
+ul
+
+li
+
+*inline elements
+
+continue on same line
+a
+
+b
+
+em
+
+img
+
+*grouping text emlements in blocks
+
+div group et of elements together
+
+*iframes
+
+mini window within page (map)
+
+iframes
+
+height
+
+width
+
+src
+
+scrolling
+
+frameborder
+
+seamless
+
+*information about your page
+
+go in head elements
+
+description
+
+keywords
+
+robots weather search engine should show page
+
+author
+
+pragma keeps browser from caching page
+
+expires
+
+*escape character page 201
+
+###Chapter 9
