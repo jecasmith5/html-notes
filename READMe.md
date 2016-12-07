@@ -511,4 +511,39 @@ expires
 
 *escape character page 201
 
-###Chapter 9
+### Chapter 9
+
+*adding flash movie to webpage
+
+location-replace-width-height-version
+
+
+convert video to flv-find flv player to play-include
+
+ the player and video in page
+
+*adding video to pages
+
+video src="path to video"
+poster="image to show while video is downloading"
+width=""
+height=""
+preload="none,auto, or metadata"
+controls"own controls for playback"
+loop"repeat video"
+
+multiple video source page 222
+
+src,type,codecs
+
+*adding audio to web pages
+
+use hosted service
+
+use flash
+
+use HTML5
+
+add flash player
+
+audio src=""controls autoplay
