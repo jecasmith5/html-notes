@@ -769,3 +769,21 @@ space between content and border
 *visibility:hidden, visibile
 
 ###chapter 14
+
+table properties
+
+list-style-type:
+
+list-style-image:
+
+list-style-position:
+
+width,padding,transform,letterspacing,fotsize,border top and bottom, text-align,background-color,hover
+
+Padding
+
+hide or show borders on empty cell
+
+spacing, collapsing
+
+###chapter 15
