@@ -787,3 +787,45 @@ hide or show borders on empty cell
 spacing, collapsing
 
 ###chapter 15
+
+####Position
+
+*Normal FLow:down the pages
+
+position:static;
+
+*Relative Positioning: shifts an element
+
+position:relative;
+
+*absolute positioning
+
+position:absolute;
+
+*Fixed Positioning:
+position:fixed;
+
+*Floating elements:move to left or right as a block element
+
+float:right;
+
+side by side use float and width
+
+clearing floats:
+
+float:left;
+
+.clear{
+
+  clear: left;
+}
+
+*overlapping elements
+
+position:Fixed
+
+z-indez:10;
+
+overflow:auto
+
+### Chapter 16
