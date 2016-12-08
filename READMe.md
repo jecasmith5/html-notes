@@ -547,3 +547,53 @@ use HTML5
 add flash player
 
 audio src=""controls autoplay
+
+### Chapter 10
+
+#### css
+
+specifies how content should appear
+
+selector and declaration  
+
+p{
+  font-family:Ariel;
+  color:yellow;
+}
+placed after closing html
+
+you can link in your css file using
+
+&lt;link href="css/styles.css"type=text/css"rel="stylesheet"/&gt;
+
+href=path,type=type of document,rel=relationship
+
+Internal css define inside head
+
+&lt;stlye type=text/css&gt;
+
+&lt;head&gt;
+
+body{
+
+  font-family: arial;
+  background-color:rgb;
+
+}
+
+hi{
+  color:fkjhf;
+}
+
+*use external style sheet most times
+
+|selector|meaning|ex|
+|--------|-------|--|
+|universal|all elementsof document|*{}|
+|type|matches element names|h1,h2,h3{}
+|class|matches class|.note|
+|id|matches id|#introduction|
+|child|matches direct child|li&gt;|a{}|
+|descendant|??|p a {}|
+|adjacent sibling|??|h1+p|
+|general sibling|?|h1~{}|
