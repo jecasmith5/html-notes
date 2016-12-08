@@ -868,3 +868,23 @@ background-image:url("url");
 }
 
 ### chapter 17
+
+HTML 5 layout
+
+header
+
+footer
+
+navigation (NAV)
+
+article
+
+aside
+
+sections
+
+heading groups(hgroup)
+
+figures(figure, figcaption)
+
+sectioning elements(div)
