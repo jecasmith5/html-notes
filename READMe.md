@@ -719,3 +719,53 @@ text-shadow:left and right, top and bottom,blur,color of drop shadow
 :focus
 
 ###chapter 13
+
+box dimensions
+
+width and height
+
+div.box {
+  height:
+  width:
+  background-color:
+  ect:
+}
+
+max and min height and width(img)
+
+min-width:
+max-width:
+
+
+min-height:
+max:height:
+
+overflow Content
+
+overflow:hidden or scroll
+
+*Border
+
+border-width:thin,medum, thick
+
+border-top,bottom,right,left-width
+
+border-style:solid,dotted,dashed,double,groove,ridge,inset,outset
+
+short hand border
+
+border: width,style,color
+
+*Margin
+
+gap between boxes
+
+*Padding
+
+space between content and border
+
+*display;inline,block,inline-block,none
+
+*visibility:hidden, visibile
+
+###chapter 14
