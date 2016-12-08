@@ -829,3 +829,42 @@ z-indez:10;
 overflow:auto
 
 ### Chapter 16
+
+-control image sizes:
+
+img.large {
+
+  width:500px
+
+  height:500px
+}
+
+img.medium{
+
+  width:250px
+  height:250px
+}
+img.small{
+  width:100px
+  height:100px
+}
+
+
+-align images
+
+img.align-left{
+
+  float:left;
+
+}
+do for left right and center
+
+-addding background images
+
+body{
+
+background-image:url("url");
+
+}
+
+### chapter 17
