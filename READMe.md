@@ -587,13 +587,43 @@ hi{
 
 *use external style sheet most times
 
+selectors:
+
 |selector|meaning|ex|
 |--------|-------|--|
 |universal|all elementsof document|*{}|
 |type|matches element names|h1,h2,h3{}
 |class|matches class|.note|
 |id|matches id|#introduction|
-|child|matches direct child|li&gt;|a{}|
+|child|matches direct child|li&gt;a{}|
 |descendant|??|p a {}|
 |adjacent sibling|??|h1+p|
 |general sibling|?|h1~{}|
+
+###Chapter 11
+
+####color
+
+foreground color:
+
+color: rgb values, hex codes, or color names.
+
+background-color:
+
+background-color:per section or for whole pages
+
+check contrast
+
+opacity:
+
+value between 0.0 and 1.0
+
+then add color
+
+hsl, hsla
+
+hsl(hue,sturation%,lightness%,alpha(transparecy) bw 0.0-1.0)
+
+###chapter 12
+
+####Text
