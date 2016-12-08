@@ -627,3 +627,95 @@ hsl(hue,sturation%,lightness%,alpha(transparecy) bw 0.0-1.0)
 ###chapter 12
 
 ####Text
+
+font-family specifies font of Text
+
+font-size is the size of the letters/words
+
+pixels(px), percentages(%), or ems(em)
+
+font face is where you can download a new font
+
+src is the path to the font
+
+format font
+
+eot-IE
+
+woff-chrome 6+
+
+ttf/otf-firefox
+
+svg
+
+*bold
+
+body{
+
+font-weight:bold;
+
+}
+
+*italic
+
+font-style:italic;
+
+* text-transform
+
+-uppercase
+
+-lowerase
+
+-capitalize (first letter of each word)
+
+*underline and strike
+
+text-decoration: none, underline, overline, line-through, blink
+
+*leading
+
+line-height:space between lines
+
+*letter and word spacing
+
+letter-spacing:space between letters
+
+word-spacing:space between words
+
+*alignment
+
+text-align:left,right,center,justify
+
+vertical-align:baseline,sub,super,top,text-top,middle,
+bottom,text-bottom
+
+*indenting text
+
+text-indent:
+
+*drop shadow
+
+text-shadow:left and right, top and bottom,blur,color of drop shadow
+
+*first letter or lines
+
+:first-letter{
+
+}
+
+:first-line{
+
+}
+
+*styling links
+
+:link color of link before clicked
+
+:visited color of link after
+
+*responding to users
+:hover
+:active
+:focus
+
+###chapter 13
