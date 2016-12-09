@@ -888,3 +888,23 @@ heading groups(hgroup)
 figures(figure, figcaption)
 
 sectioning elements(div)
+
+#CSS3 Notes
+
+compatibility of html5
+
+ <!--[if lt IE 9]>
+
+ <script src="//html5shiv.googlecode.com/
+    svn/trunk/html5.js"></script>
+    <![endif]-->
+
+make sure IE is up to date
+
+###CSS creating styles and style sheet
+
+how to format the pages
+
+selctor {
+  property:value
+}
