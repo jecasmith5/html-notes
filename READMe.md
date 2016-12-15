@@ -438,11 +438,11 @@ HTML 4-1997
 
 XHTML 1.0-2000
 
-HTML5-2000 <!DOCTYPE html>
+HTML5-2000 &lt;!DOCTYPE html&gt;
 
 *comments
 
-<!--comments go here-->
+&lt;!--comments go here--&gt;
 
 *id Attributes
 
@@ -893,11 +893,11 @@ sectioning elements(div)
 
 compatibility of html5
 
- <!--[if lt IE 9]>
+ &lt;!--[if lt IE 9]&gt;
 
- <script src="//html5shiv.googlecode.com/
-    svn/trunk/html5.js"></script>
-    <![endif]-->
+ &lt;script src="//html5shiv.googlecode.com/
+    svn/trunk/html5.js"&gt;&lt;/script&gt;
+    &lt;![endif]--&gt;
 
 make sure IE is up to date
 
@@ -975,3 +975,35 @@ background-size: 100% 100%
 contain maintains ratio while resizing image
 
 link status: particular order: link, visited, hover, and active.
+
+###Tables and forms
+
+padding: top, right, bottom, left;
+
+aligning text horizontially
+
+table{
+  text.align:left, right, center, justified;
+
+  vertical-align:top, baseline, middle, bottom;
+}
+
+styling rows and colors
+
+tr:nth-of-type(odd) { background-color: red; } tr:nth-of-type(even) { background-color: blue; }
+
+styling forms
+
+&lt;fieldset&gt; groups related form questions
+
+&lt;legend&gt; provides label for group
+
+###CSS layout
+
+fixed-width- workswith having most control but doesnt allow
+
+ visitors to resize pages
+
+liquid- adjust to fit browsers width
+
+Responsive web design uses media queries to send different designs to different width browsers
