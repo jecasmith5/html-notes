@@ -23,7 +23,7 @@ internal and external css
 * universal selector
 \
 
-###Adding graphics to webpage
+### Chapter 8 Adding graphics to webpage
 
 borders-around an image
 
@@ -84,8 +84,110 @@ background-size: 100% 100%
 contain maintains ratio while resizing image
 
 link status: particular order: link, visited, hover, and active.
+###Chapter 10 Animations
 
-###Tables and forms
+####transform:
+
+rotate- degree from 0-360
+
+scale-resize an element
+
+ translate-moves an element left right up and down
+
+skew: simulates 3d look distorts element by using degrees
+
+multiple:      transform: skew(45deg,0deg) scale(.5) translate(400px,500px) rotate(90deg);
+
+order is based on order of elements
+
+change orgin from center:     
+
+transform-origin: left top;
+
+####transitions
+
+two styles, before and after
+
+apply to original styles
+
+Trigger: action that causes the change
+
+psuedo classes
+
+:hover
+
+:active
+
+:target
+
+:focus
+
+transition-property:specifies what is being animated
+
+transition-duration:how long animation takes to complete
+
+transition-timing-function: speed of animation
+
+linear,ease,ease-in,ease-out,and ease-in-out
+
+transition:delay stop animation from occuring instantly
+
+###Animations
+
+1.Define animation
+
+2.apply animation to an element
+
+@keyframes name{
+  from{
+
+opacity:0;
+
+  }
+
+  to{
+
+opacity:1;
+
+  }
+
+  }
+
+}
+
+shorthand
+
+element{
+  name, duration, timing function, count, direction, delay, and fill- mode
+}
+
+animation-play-state:running or paused
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###chapter 11 Tables and forms
 
 padding: top, right, bottom, left;
 
