@@ -1,5 +1,7 @@
 #CSS3 Notes
 
+###Chapter1
+
 compatibility of html5
 
  &lt;!--[if lt IE 9]&gt;
@@ -10,9 +12,27 @@ compatibility of html5
 
 make sure IE is up to date
 
-###CSS creating styles and style sheet
+###Chapter2
+
+CSS creating styles and style sheet
 
 how to format the pages
+
+selector-tells browser which elements to style.
+
+declaration block-where you put all of the styles
+
+declarations-thestyles themselves
+
+properties- what youre changing
+
+value-how youre changing the property
+
+internal use style in head section followed by the CSS
+
+external use link in head to separate page where css is
+
+###Chapter3
 
 selctor {
   property:value
@@ -21,7 +41,141 @@ selctor {
 internal and external css
 
 * universal selector
-\
+
+ancestor
+
+descndent
+
+parent
+
+child
+
+sibling
+
+pseudo classes/elements
+
+classes:
+
+a:link
+
+a:visited
+
+a:hover
+
+a:active
+
+a:focus
+
+:first-letter,first-line
+
+elements:
+
+before:adds content preceding any element
+
+after:adds content after elements
+
+::selection
+
+Child:
+
+:first-child :lastchild, nth-child
+
+:first of type lastof type
+nth of type
+
+Siblings
+
+:not()
+
+###Chapter4
+
+Style inheritance
+
+ properties that affect the placement of elements on the page or the margins, background colors, and borders of elements aren’t inherited.
+
+###Chapter5
+
+Managing multiple style sheets
+
+nearest ancestor wins
+
+direct applied style wins
+
+inline style id then class tag
+
+last style breaks the tie
+
+avoiding specificity ward
+
+###Chapter6
+
+Formatting text
+
+fonts:only certain fonts are supported on different browsers
+
+serif-long passages
+
+sans serif- headlines
+
+web fonts @font face
+
+EOT:embedded open type
+
+true type and open type
+
+web open font format
+
+scalable vector graphics
+
+*legal isues*
+
+font size
+
+px,ems,%
+
+italicizing and bolding
+
+font-variant:small caps
+
+text-decorating
+
+underline,overline ect
+
+letter and word text shadow
+
+space between lines, indents,first letter, lines
+
+styling list
+
+list-style-position (outside or inside)
+
+graphic bullets
+
+###Chapter 7
+
+Margins padding and borders
+
+Box Model:
+
+content-padding(space between content and border)-border(around padding and content)-margin(around element)
+
+you can use magins and padding to layout an entire page
+
+TRBL-TRouBLE
+
+use negative margins to remove space
+
+inline-follows previous element, block-creates break after
+
+add borders for design
+
+size,style,and color
+
+rounded corners
+
+border-radius
+
+drop shadows-make it popo on the page
 
 ### Chapter 8 Adding graphics to webpage
 
@@ -84,6 +238,31 @@ background-size: 100% 100%
 contain maintains ratio while resizing image
 
 link status: particular order: link, visited, hover, and active.
+
+###Chapter 9
+
+Navigation Bar
+
+LoVe/HAte
+
+using graphics
+
+padding allows room
+
+psuedo classes add helpful feedback
+
+use unordered list for nav bars
+
+remove bullets and get rid of padding
+
+Vertical nav bars: use blocks,liit the width
+
+horizontal nav bars:inline-block
+
+Preloading rollovers:
+
+style links
+
 ###Chapter 10 Animations
 
 ####transform:
@@ -163,30 +342,6 @@ element{
 
 animation-play-state:running or paused
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ###chapter 11 Tables and forms
 
 padding: top, right, bottom, left;
@@ -218,6 +373,29 @@ fixed-width- workswith having most control but doesnt allow
 liquid- adjust to fit browsers width
 
 Responsive web design uses media queries to send different designs to different width browsers
+
+###Chapter 12
+
+CSS layout
+
+fixed-960px
+
+liquid-adjust to fit browsers width
+
+rwd-changes presentation per width
+
+mobile first
+
+identify boxes
+
+go with flow
+
+background images
+
+layer elements accordingly
+
+use margin and paddings
+
 
 ###chapter 13
 
@@ -255,7 +433,7 @@ background-image:linear-gradient(
   left,red 05, red 25%, white 25%,white 75%, blue 75%,blue 100%;)
   )
 
-**Preventing float drops
+**Preventing float drops**
 
 do the math include padding
 
@@ -287,7 +465,7 @@ css media queries-send different styles based on conditions(width and height)
 
 above title tag.
 
-*media queries:
+*media queries:*
 
 adjust columns
 
@@ -301,13 +479,13 @@ change navigation menus
 
 hide content on mobile devices
 
-*breakpoint at which point do things change
+*breakpoint at which point do things change*
 
 smartphones, tablets, and desktop monitors
 
 start with default design then create media querie syles to override default styles and to reformat the pages
 
-*main approaches
+*main approaches*
 
 Desktop first:do everything concerning desktop first then add media queries for phones/tablets
 
@@ -334,18 +512,105 @@ use both to set a range <link href="css/medium.css" rel="stylesheet" media="(min
 
      you can have one style sheet linking to all style sheets
 
-      @import url(css/base.css); no media query, applies to all */
+      @import url(css/base.css); no media query, applies to all */*
 
      @import url(css/medium.css) (min-width:481px) and (max-width:768);
 
      @import url(css/small.css) (max-width: 480px);
 
-*flexible grids use percentages
+*flexible grids use percentages*
 
 box-sizing:border box to git rid of float drops
 
-*Fluid Images:
+*Fluid Images:*
 
 img{
   max-width:100%
 }
+
+###Chapter 15
+
+Positioning elements on a web page
+
+*Absolute positioning*
+
+specific location completly detached from flow of elements
+
+*relative positioning*
+
+leaves hole in flow of page
+
+*fixed*
+
+locked into place on screen
+
+*static*
+
+normal top down flow
+
+positioning has four properties
+
+top
+
+left
+
+bottom
+
+right
+
+   A tag is positioned relative to the browser window if it has an absolute posi- tion and it’s not inside
+  any other tag that has either absolute, relative, or fixed positioning applied to it.
+
+   A tag is positioned relative to the edges of another element if it’s inside another tag with absolute, relative, or fixed positioning.
+
+   z-index represents the order in which positioned elements are stacked on top of the page.
+
+   *visibility*
+
+   *opacity*
+
+###Chapter 16
+
+   CSS for the printed page
+
+   printer friendly versions
+
+   *Media Style Sheets*
+
+   10 types
+
+   all, braille, embossed, handheld, print, projection, screen, speech, tty, and tv.
+
+   all-everydevice
+
+   screen-display only on monitors
+
+   print-apply only when the page is printed
+
+   Adding media style Sheets
+
+  HTML      <link rel="stylesheet" media="print" href="print.css"/>
+
+  CSS @media print {
+
+       /* put your styles for the printer in here */*
+
+     }
+
+     use pt when editing font size for print version 12 pt;
+
+     page-break-before and page-break-after
+
+###Chapter 17
+
+Adding comments
+
+/* comment(/**)
+
+Name Style Clearly
+
+by purpose, not appearance or position
+
+Use multiple classes
+
+Use comments to seperate
