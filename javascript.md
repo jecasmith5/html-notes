@@ -283,3 +283,169 @@ prints line, returns values
 pure-no side effects
 
 #chaper 4
+
+objects and arrays
+
+objecs-group values including other objects
+
+WERESQUIRREL
+
+data structure-stores information in sets
+
+array-list of values between [] separated by commas
+
+var listOfNumbers = [2, 3, 5, 7, 11];
+
+starts at 0
+
+listOfNumbers[0]=2
+
+properties
+
+accesse properties .x of value[x]
+
+toUpperCase-convert to uppercase
+
+toLowerCase-convert to lower
+
+properties that contain functions-methods
+
+push-add values to end of array-list
+
+pop-removes values
+
+join-array of strings can be made into single string
+
+####objects
+
+collections of properties can add and remove these properties
+{}
+
+  var descriptions = {
+  work: "Went to work",
+  "touched tree": "Touched a tree"
+};
+
+deletes-cuts off from tentacle
+
+in-returns booleen value
+
+####mutabiity
+
+immutable-impossible to changean existing value
+
+string that contains "cat", it is not possible for other code to change a character in that string to make it spell "rat".
+
+objects, content of value can be modified by changing properties
+
+####lycannthropes log
+
+correlation-measure of dependence between variables
+
+-1 to 1
+
+ϕ =
+n11n00 - n10n01
+√ n1•n0•n•1n•0
+
+####Objects as maps
+
+name and value properties
+
+square bracket access notation to create and read the properties and can use the in operator to test whether a given property exists.
+
+var map = {};
+function storePhi(event, phi) {
+  map[event] = phi;
+}
+
+map-way to change domains
+
+####Arrayology
+
+unshift and shift add or remove at start of Array
+
+add task to end of list-rememberTo
+
+ready to do something-whatIsNext
+
+get and removes item from front of list
+
+indexOf(front of list)
+
+lastIndexOf-end of list
+
+slice-only whats in between start and finish
+
+function argumentCounter() {
+  console.log("You gave me", arguments.length, "arguments.");
+}
+argumentCounter("Straw man", "Tautology", "Ad hominem");
+// → You gave me 3 arguments.
+
+####Math
+
+Math.max (maximum)
+
+ Math.min (minimum)
+
+ Math.sqrt (square root).
+
+cos (cosine), sin (sine), and tan (tangent)
+
+inverse
+
+acos, asin, and atan
+
+Math.PI-pi
+
+math.random--gives random number between 0 and 1
+
+math.floor rounds number down
+
+math.ceil rounds number up
+
+#Chapter5
+
+####Abstraction
+
+hide details and give us ability to talk at higher level
+
+insteaad of uw=sing a million
+
+for() create a function
+
+function logEach(array) {
+  for (var i = 0; i < array.length; i++)
+    console.log(array[i]);
+}
+
+.forEach
+
+####Higher order functions
+
+rely on other functions
+
+functions that create new functions
+
+functions that change other functions
+
+apply
+
+####json
+
+JavaScript Object Notation. It is widely used as a data storage and communication format on the Web.
+
+fitering an array-builds new array based on conditions
+
+####Transforming with map
+
+transforms an array by applying a function to all of its elements and building a new array from the returned values
+
+composability
+
+compose into concepts to write clear
+
+Binding
+
+creates new function that calls original function
