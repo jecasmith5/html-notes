@@ -449,3 +449,122 @@ compose into concepts to write clear
 Binding
 
 creates new function that calls original function
+
+#Chapter 6
+
+complexity made easier by separating into compartments
+
+objects are compartments
+
+methods present interface of how object is used
+
+encapsulation (distinguishing between internal complexity and external interface)
+
+####methods
+
+properties that hold function values
+
+var rabbit = {};
+rabbit.speak = function(line) {
+  console.log("The rabbit says '" + line + "'");
+};
+
+rabbit.speak("I'm alive.");
+// → The rabbit says 'I'm alive.'
+
+object.method()
+
+function speak(line) {
+  console.log("The " + this.type + " rabbit says '" +
+              line + "'");
+}
+var whiteRabbit = {type: "white", speak: speak};
+var fatRabbit = {type: "fat", speak: speak};
+
+whiteRabbit.speak("Oh my ears and whiskers, " + "how late it's getting!");
+// → The white rabbit says 'Oh my ears and whiskers, how
+//   late it's getting!'
+fatRabbit.speak("I could sure use a carrot right now.");
+// → The fat rabbit says 'I could sure use a carrot
+//   right now.'
+
+####prototypes
+
+var empty = {};
+console.log(empty.toString);
+// → function toString(){…}
+console.log(empty.toString());
+// → [object Object]
+
+When an object gets a request for a property that it does not have, its prototype will be searched for the property, then the prototype’s prototype, and so on.
+
+Functions derive from Function.prototype, and arrays derive from Array.prototype
+
+Object.getPrototypeOf function obviously returns the prototype of an object
+
+#constructors
+
+create objects that derive from shared prototypes
+
+Constructors (in fact, all functions) automatically get a property named prototype
+
+Rabbit.prototype.speak = function(line) {
+  console.log("The " + this.type + " rabbit says '" +
+              line + "'");
+};
+blackRabbit.speak("Doom...");
+// → The black rabbit says 'Doom...'
+
+####prototype interference
+
+A prototype can be used at any time to add new properties and methods to all objects based on it
+
+####Prototype-less objects
+
+Object.create function-allows us to create an object with a specific prototype. You are allowed to pass null through
+
+####Polymorphism
+
+any kind of object that supports this interface can be plugged into the code, and it will work
+
+####tabel
+
+minHeight() returns a number indicating the minimum height this cell requires (in lines).
+
+minWidth() returns a number indicating this cell’s minimum width (in characters).
+
+ draw(width, height) returns an array of length height, which contains a series of strings that are each width characters wide. This represents the content of the cell.
+
+ function drawTable(rows) {
+  var heights = rowHeights(rows);
+  var widths = colWidths(rows);
+
+  function drawLine(blocks, lineNo) {
+    return blocks.map(function(block) {
+      return block[lineNo];
+    }).join(" ");
+  }
+
+  function drawRow(row, rowNum) {
+    var blocks = row.map(function(cell, colNum) {
+      return cell.draw(widths[colNum], heights[rowNum]);
+    });
+    return blocks[0].map(function(, lineNo) {
+      return drawLine(blocks, lineNo);
+    }).join("\n");
+  }
+
+  return rows.map(drawRow).join("\n");
+}
+
+####getters and setters
+
+specify properties that look like normal properties but secretly have methods associated with them
+
+####The instanceof operator
+
+sees through inherited types.
+
+ An RTextCell is an instance of TextCell because RTextCell.prototype derives from TextCell.prototype.
+
+ The operator can be applied to standard constructors like Array. Almost every object is an instance of Object.
