@@ -568,3 +568,117 @@ sees through inherited types.
  An RTextCell is an instance of TextCell because RTextCell.prototype derives from TextCell.prototype.
 
  The operator can be applied to standard constructors like Array. Almost every object is an instance of Object.
+
+#Chapter 8
+
+Bugs and Error Handling
+
+bugs-flaws in a Program
+
+####Programmer mistakes
+
+-typos
+
+Javascript doesnt help to find mistakes
+
+Javascript catches errors that are not syntactically correct
+
+most times it outputs a NaN or undefined values
+
+debugging-process of finding mistakes
+
+####Strict mode
+
+if you use "use strict" at the top of file or function body
+
+ex:
+
+function canYouSpotTheProblem() {
+  "use strict";
+  for (counter = 0; counter < 10; counter++)
+    console.log("Happy happy");
+}
+
+canYouSpotTheProblem();
+// → ReferenceError: counter is not defined
+
+forgetting var before defining a variable will give an error instead of using the global scope
+
+this. value holds undefined function and registers error instead using global
+
+wont allow a function to have more than one parameter of the same name
+
+####Testing
+
+you can write a second program in order to test your program
+
+example program
+
+function Vector(x, y) {
+  this.x = x;
+  this.y = y;
+}
+Vector.prototype.plus = function(other) {
+  return new Vector(this.x + other.x, this.y + other.y);
+};
+
+testing program:
+
+function testVector() {
+  var p1 = new Vector(10, 20);
+  var p2 = new Vector(-10, 5);
+  var p3 = p1.plus(p2);
+
+  if (p1.x !== 10) return "fail: x property";
+  if (p1.y !== 20) return "fail: y property";
+  if (p2.x !== -10) return "fail: negative x property";
+  if (p3.x !== 0) return "fail: x from plus";
+  if (p3.y !== 25) return "fail: y from plus";
+  return "everything ok";
+}
+console.log(testVector());
+// → everything ok
+
+test suites:pieces of software that help you build and run collections of tests by providing a language (in the form of functions and methods) suited to expressing tests and by outputting info when a test fails. aka-testing frameworks.
+
+####Debugging
+
+sometimes itll point to line of error
+
+think what is happening, why its happening and how to change it
+
+use debugging tools in browsers
+
+####Exceptions
+
+exception handeling jumps back to where the program is working
+
+set “obstacles” along the stack to catch the exception as it is zooming down. Then you can do something with it, after which the program continues running at the point where the exception was caught.
+
+example
+
+function promptDirection(question) {
+  var result = prompt(question, "");
+  if (result.toLowerCase() == "left") return "L";
+  if (result.toLowerCase() == "right") return "R";
+  throw new Error("Invalid direction: " + result);
+}
+
+function look() {
+  if (promptDirection("Which way?") == "L")
+    return "a house";
+  else
+    return "two angry bears";
+}
+
+try {
+  console.log("You see", look());
+} catch (error) {
+  console.log("Something went wrong: " + error);
+}
+
+throw:raise exception
+
+try{}catch{}-catching exception
+
+  stack-trace
