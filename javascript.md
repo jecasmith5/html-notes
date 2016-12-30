@@ -682,3 +682,423 @@ throw:raise exception
 try{}catch{}-catching exception
 
   stack-trace
+
+#Chapter 9
+
+regular expressions-tool that describes patterns in string Data-read
+
+type of object
+
+var re1=new RegExp("string");
+var re2=/string/;
+
+if there is another slash you have to take into account
+
+var eighteenPlus = /eighteen\+/;
+
+####Testing for matches
+
+If you pass it a string, it will return true/false telling you if the string contains a match of the pattern in the expression.
+
+console.log(/abc/.test("abcde"));
+// → true
+
+if abc occurs anywhere in string it will return true
+
+console.log(/abc/.test("abxde"));
+// → false
+
+####matching a set of characters
+
+putting a set of numbers between square brackets makes that part of the expression match any of the characters between the brackets.
+
+console.log(/[0123456789]/.test("in 1992"));
+// → true
+console.log(/[0-9]/.test("in 1992"));
+// → true
+
+\d means [0-9]
+
+\w	An alphanumeric character (“word character”)
+
+\s	Any whitespace character (space, tab, newline, and similar)
+
+\D	A character that is not a digit
+
+\W	A nonalphanumeric character
+
+\S	A nonwhitespace character
+.	Any character except for newline
+
+var dateTime = /\d\d-\d\d-\d\d\d\d \d\d:\d\d/;
+
+console.log(dateTime.test("30-01-2003 15:20"));
+
+// → true
+
+console.log(dateTime.test("30-jan-2003 15:20"));
+
+// → false
+
+var notBinary = /[^01]/;
+
+to test for not 1s and 0s
+
+####Repeating parts of a pattern
+
++ element may be repeated more than once
+
+* allows the pattern to match 0 times
+
+? makes it Optional
+
+how many times a thing is supposed to happen
+
+var dateTime = /\d{1,2}-\d{1,2}-\d{4} \d{1,2}:\d{2}/;
+
+console.log(dateTime.test("30-1-2003 8:45"));
+// → true
+
+open digit range {4,}
+
+####Grouping subexpressions
+
+var cartoonCrying = /boo+(hoo+)+/i;
+console.log(cartoonCrying.test("Boohoooohoohooo"));
+// → true
+
+i makes it case insensitive
+
+####Matches and groups
+
+execute methode-returns null if no match
+and returns object with info if does match
+
+var match = /\d+/.exec("one two 100");
+console.log(match);
+// → ["100"]
+console.log(match.index);
+// → 8
+
+tells where the match started
+
+####The Date type
+
+to get current date and times
+
+console.log(new Date());
+
+function findDate(string) {
+  var dateTime = /(\d{1,2})-(\d{1,2})-(\d{4})/;
+  var match = dateTime.exec(string);
+  return new Date(Number(match[3]),
+                  Number(match[2]) - 1,
+                  Number(match[1]));
+}
+console.log(findDate("30-1-2003"));
+// → Thu Jan 30 2003 00:00:00 GMT+0100 (CET)
+
+####Word and string boundaries
+
+^start
+
+$end
+
+####choicepatterns
+
+a number followed by one of the words pig, cow, or chicken, or any of their plural forms.
+
+var animalCount = /\b\d+ (pig|cow|chicken)s?\b/;
+
+console.log(animalCount.test("15 pigs"));
+// → true
+
+console.log(animalCount.test("15 pigchickens"));
+// → false
+
+####backtracking
+
+/\b([01]+b|\d+|[\da-f]+h)\b/
+
+binary,regular decimal,or hexadecimal
+
+if one branch doesnt wor out, goes back to try the other ones, will stop at first full match
+
+####the replace method
+
+you can replace part of a string with another string
+
+console.log("Borobudur".replace(/[ou]/, "a"));
+// → Barobudur
+console.log("Borobudur".replace(/[ou]/g, "a"));
+// → Barabadar
+
+by adding the g it replaces all os and us in the string with a
+
+we can combine matching and replacing to swap placements like lastname, firstname to firstname lastname
+
+console.log(
+  "Hopper, Grace\n
+  McCarthy, John\n
+  Ritchie, Dennis"
+    .replace(/([\w ]+), ([\w ]+)/g, "$2 $1"));
+// → Grace Hopper
+//   John McCarthy
+//   Dennis Ritchie
+
+$2 and $1 are parenthesized groups in the pattern up to $9 or all by $&
+
+using functions to replace
+
+var s = "the cia and fbi";
+console.log(s.replace(/\b(fbi|cia)\b/g, function(str) {
+  return str.toUpperCase();
+}));
+// → the CIA and FBI
+
+or
+
+var stock = "1 lemon, 2 cabbages, and 101 eggs";
+function minusOne(match, amount, unit) {
+  amount = Number(amount) - 1;
+  if (amount == 1) // only one left, remove the 's'
+    unit = unit.slice(0, unit.length - 1);
+  else if (amount == 0)
+    amount = "no";
+  return amount + " " + unit;
+}
+console.log(stock.replace(/(\d+) (\w+)/g, minusOne));
+// → no lemon, 1 cabbage, and 100 eggs
+
+####The search method
+
+shows where it was found or -1 if it wasnt
+
+console.log("  word".search(/\S/));
+// → 2
+
+console.log("    ".search(/\S/));
+// → -1
+
+####The lastIndex property
+
+source-string expression was created from
+
+lastindex-where next match will start
+
+####Looping over matches
+
+var input = "A string with 3 numbers in it... 42 and 88.";
+var number = /\b(\d+)\b/g;
+var match;
+while (match = number.exec(input))
+  console.log("Found", match[1], "at", match.index);
+// → Found 3 at 14
+//   Found 42 at 33
+//   Found 88 at 40
+
+####Parsing an INI file
+
+Blank lines and lines starting with semicolons are ignored.
+
+Lines wrapped in [ and ] start a new section.
+
+Lines containing an alphanumeric identifier followed by an = character add a setting to the current section.
+
+Anything else is invalid.
+
+split method also allows a regular expression as its argument, we can split on a regular expression like /\r?\n/ to split in a way that allows both "\n" and "\r\n" between lines.
+});
+
+####RegExp
+
+/abc/	A sequence of characters
+
+/[abc]/	Any character from a set of characters
+
+/[^abc]/	Any character not in a set of characters
+
+/[0-9]/	Any character in a range of characters
+
+/x+/	One or more occurrences of the pattern x
+
+/x+?/	One or more occurrences, nongreedy
+
+/x*/	Zero or more occurrences
+
+/x?/	Zero or one occurrence
+
+/x{2,4}/	Between two and four occurrences
+
+/(abc)/	A group
+
+/a|b|c/	Any one of several patterns
+
+/\d/	Any digit character
+
+/\w/	An alphanumeric character (“word character”)
+
+/\s/	Any whitespace character
+
+/./	Any character except newlines
+
+/\b/	A word boundary
+
+/^/	Start of input
+
+/$/	End of input
+
+###extra notes
+
+reg expresions-a pattern that a string can match
+
+^\d{5}(\-\d{4})?$
+
+01331-3859
+
+^ beginning first digit must be a number and there must be 5 numbers in a row the ? means entire group is optional and $ means its the end no extra between big and end
+
+#Chapter 10
+
+like chapters and sections in a book
+
+why use modules:
+
+maintainability: self-contained.
+
+namespacing:sharing global variables between unrelated code is not okay
+
+reusability:instead of updating everypiece of code you can reuse modules
+
+decoupling:isolates code from eachother
+
+allows module to grow
+
+####Using Functions as namespacing
+
+var dayName = function() {
+  var names = ["Sunday", "Monday", "Tuesday", "Wednesday",
+               "Thursday", "Friday", "Saturday"];
+  return function(number) {
+    return names[number];
+  };
+}();
+
+console.log(dayName(3));
+// → Wednesday
+
+define variables inside of functions to keep them outside of global scope
+
+####Objects as interfaces
+
+in order to return function you have to wrap two functions inside an Object
+
+var weekDay = function() {
+  var names = ["Sunday", "Monday", "Tuesday", "Wednesday",
+               "Thursday", "Friday", "Saturday"];
+  return {
+    name: function(number) { return names[number]; },
+    number: function(name) { return names.indexOf(name); }
+  };
+}();
+
+console.log(weekDay.name(weekDay.number("Sunday")));
+// → Sunday
+
+(function(exports) {
+  var names = ["Sunday", "Monday", "Tuesday", "Wednesday",
+               "Thursday", "Friday", "Saturday"];
+
+  exports.name = function(number) {
+    return names[number];
+  };
+  exports.number = function(name) {
+    return names.indexOf(name);
+  };
+})(this.weekDay = {});
+
+console.log(weekDay.name(weekDay.number("Saturday")));
+// → Saturday
+
+module function takes its interface object as an argument, allowing code outside of the function to create it and store it in a variable.
+
+####Detaching from the global scope
+
+create a system that allows one module to directly ask for the interface object of another module, without going through the global scope
+
+require function that will load that module’s file (from disk or the Web, depending on the platform we are running on) and return the appropriate interface value.
+
+need two things
+
+1:readFile function that returns content as a string
+
+2:execute string as javascript
+
+####Evaluating data as code
+
+eval-excecutes a string in the current scope
+
+use Function Constructor two arguments
+
+var plusOne = new Function("n", "return n + 1;");
+console.log(plusOne(4));
+// → 5
+
+####require
+
+function require(name) {
+  var code = new Function("exports", readFile(name));
+  var exports = {};
+  code(exports);
+  return exports;
+}
+
+console.log(require("weekDay").name(1));
+// → Monday
+
+var names = ["Sunday", "Monday", "Tuesday", "Wednesday",
+             "Thursday", "Friday", "Saturday"];
+
+exports.name = function(number) {
+  return names[number];
+};
+exports.number = function(name) {
+  return names.indexOf(name);
+};
+
+var weekDay = require("weekDay");
+var today = require("today");
+
+console.log(weekDay.name(today.dayNumber()));
+
+better:
+
+function require(name) {
+  if (name in require.cache)
+    return require.cache[name];
+
+  var code = new Function("exports, module", readFile(name));
+  var exports = {}, module = {exports: exports};
+  code(exports, module);
+
+  require.cache[name] = module.exports;
+  return module.exports;
+}
+require.cache = Object.create(null);
+
+commonjsmodules
+
+####Interface Design
+
+predictabiity-follow conventions so other programmers can help
+
+the actual behavior of it
+
+####composability
+try using pure functions
+
+module needs to be able to compose easily with other
+
+####Layered interfaces
+
+provide two interfaces a low and high level
