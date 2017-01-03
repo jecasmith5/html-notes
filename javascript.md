@@ -1102,3 +1102,132 @@ module needs to be able to compose easily with other
 ####Layered interfaces
 
 provide two interfaces a low and high level
+
+#chapter12
+
+url- uniform resourcw locator
+
+http://-protocol
+
+eloquentjavastcript.net/-server
+
+12_browser.html-path
+
+every computer has unique ip bbut are substituted with domain names
+
+html is the way the document is formatted
+
+script allows us to acces javascfipt in our html documents
+
+sandboxing-isolating a programs environment
+
+#chapter13
+
+document- lets us access objects
+and documentElement is the object of the html tangent
+
+####trees
+
+datastructures are called trees ifit has branches
+
+trees have different kind of nodes
+
+html -head and body
+
+head-title-"words"
+
+body-h1,p-"words"/links
+
+####Moving through the tree
+
+function talksAbout(node, string) {
+  if (node.nodeType == document.ELEMENT_NODE) {
+    for (var i = 0; i < node.childNodes.length; i++) {
+      if (talksAbout(node.childNodes[i], string))
+        return true;
+    }
+    return false;
+  } else if (node.nodeType == document.TEXT_NODE) {
+    return node.nodeValue.indexOf(string) > -1;
+  }
+}
+
+console.log(talksAbout(document.body, "book"));
+// → true
+
+getElementsByTagName method, which collects all elements with the given tag name
+
+getElementById
+
+getAttribute and setAttribute methods
+
+class
+
+offsetWidth offsetHeight -space the element takes up in pixels
+
+clientWidth and clientHeight-size of the space inside element
+
+getBoundingClientRect method. It returns an object with top, bottom, left, and right properties, indicating the pixel positions of the sides of the element relative to the top left of the screen
+
+querySelectorAll- takes a selector string and returns an array-like object containing all the elements that it matches.
+
+#chapter14
+
+<p>Click this document to activate the handler.</p>
+<script>
+  addEventListener("click", function() {
+    console.log("You clicked!");
+  });
+</script>
+
+"click"
+
+addEventListener has two arguments the second being a function that logs something to the console when it is clicked
+
+to prevent default mehtods associated with handlers use prevetnDefault on the object
+
+<a href="https://developer.mozilla.org/">MDN</a>
+<script>
+  var link = document.querySelector("a");
+  link.addEventListener("click", function(event) {
+    console.log("Nope.");
+    event.preventDefault();
+  });
+</script>
+
+when key is pressed=keydown
+
+not-keyup
+
+console.log("Violet".charCodeAt(0));
+// → 86
+console.log("1".charCodeAt(0));
+// → 49
+
+to find numeric code of letter wanting to have event
+
+keypress is the text
+
+mouesdown, mouse up, click,dblclick,mousemove, mouseout,
+
+use relatedTarget
+
+isInside
+
+scroll
+
+focus
+
+onchange-An HTML element has been changed
+
+onclick-The user clicks an HTML element
+
+onmouseover-The user moves the mouse over an HTML element
+
+onmouseout-The user moves the mouse away from an HTML element
+
+onkeydown-The user pushes a keyboard key
+
+onload-The browser has finished loading the page
+
+#chapter15
