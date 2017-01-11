@@ -1186,7 +1186,7 @@ addEventListener has two arguments the second being a function that logs somethi
 
 to prevent default mehtods associated with handlers use prevetnDefault on the object
 
-<a href="https://developer.mozilla.org/">MDN</a>
+/*<a href="https://developer.mozilla.org/">MDN</a>/*
 <script>
   var link = document.querySelector("a");
   link.addEventListener("click", function(event) {
@@ -1230,4 +1230,887 @@ onkeydown-The user pushes a keyboard key
 
 onload-The browser has finished loading the page
 
-#chapter15
+#chapter17
+
+####http
+
+hyper transfer protocol-how data is requested and provided on the Web
+
+steps to find this link
+
+eloquentjavascript.net/17_http.html
+
+1-(request)looks up the address of the server associated with eloquentjavascript.net and tries to open a TCP connection to it on port 80, the default port for HTTP
+
+browser sends something like this:
+
+GET /17_http.html HTTP/1.1
+
+---(GET is the method(DELETE,PUT to replace, POST to send))
+
+---(HTTP/1.1  version HTTP)
+
+Host: eloquentjavascript.net
+
+---(path of the resource)
+
+User-Agent: Your browser's name
+
+2-server responds
+
+HTTP/1.1 200 OK
+
+---(version and status of response, in numbers then human language)
+
+------code start with 2-code suceeded
+
+------code start with 4- error on request(404)
+
+------code start with 5-server error
+
+---the rest are exra headers
+
+Content-Length: 65585
+
+---size if document in bytes
+
+Content-Type: text/html
+
+---type of document
+
+Last-Modified: Wed, 09 Apr 2014 10:48:09 GMT
+
+---when it was last modified
+
+<!doctype html> (start of document)
+
+... the rest of the document
+
+####Browsers and HTTP
+
+#####GET
+
+handle multiple request simultaniously using GET request
+
+forms can be filled out and sent back to the server
+
+<form method="GET" action="example/message.html">
+
+  <p>Name: <input type="text" name="name"></p>
+
+  <p>Message:<br><textarea name="message"></textarea></p>
+
+  <p><button type="submit">Send</button></p>
+
+</form>
+
+when you click the Send button, the information in those fields will be encoded into a query string.
+
+When the <form> element’s method attribute is GET (or is omitted), that query string is tacked onto the action URL, and the browser makes a GET request to that URL.
+
+GET /example/message.html?name=Jean&message=Yes%3F HTTP/1.1
+
+?-start of a query string
+
+pairs of names and values, corresponding to the name attribute on the form field elements and the content of those elements, respectively. An ampersand character (&) is used to separate the pairs.
+
+name=Jean&message=Yes?
+
+the question mark in the message must be escaped so it has % and its character code in hexadecimal
+
+encodeURIComponent and decodeURIComponent functions-encode and decode this format.
+
+console.log(encodeURIComponent("Hello & goodbye"));
+// → Hello%20%26%20goodbye
+console.log(decodeURIComponent("Hello%20%26%20goodbye"));
+// → Hello & goodbye
+
+#####POST
+
+POST /example/message.html HTTP/1.1
+
+Content-length: 24
+
+Content-type: application/x-www-form-urlencoded
+
+name=Jean&message=Yes%3F
+
+put the query string in body of the request, rather than adding it to the URL.
+
+GET method is used for requests that do not have side effects, such as doing a search
+
+POST-Requests that change something on the server, such as creating a new account or posting a message
+
+####XMLHttpRequest
+
+interface through which browser JavaScript can make HTTP requests
+
+####Sending a request
+
+to make a simple request-create a request object with the XMLHttpRequest constructor and call its open and send methods.
+
+var req = new XMLHttpRequest();
+
+req.open("GET", "example/data.txt", false);
+
+---( open method configures the request )
+
+req.send(null);
+
+console.log(req.responseText);
+
+// → This is the content of data.txt
+
+console.log(req.status, req.statusText);
+
+// → 200 OK
+
+console.log(req.getResponseHeader("content-type"));
+
+// → text/plain
+
+If we pass true as the third argument to open, the request is asynchronous. This means that when we call send, the only thing that happens right away is that the request is scheduled to be sent. Our program can continue, and the browser will take care of the sending and receiving of data in the background.
+
+as the request is running, we won’t be able to access the response unless we use load
+
+
+var req = new XMLHttpRequest();
+
+req.open("GET", "example/data.txt", true);
+
+req.addEventListener("load", function() {
+
+  console.log("Done:", req.status);
+
+  ---(a mechanism that will notify us when the data is available.)
+
+});
+
+req.send(null);
+
+####Fetching XML Data
+
+resource retrieved by an XMLHttpRequest object is an XML document, the object’s responseXML property will hold a parsed representation of this document.
+
+ The object that responseXML holds corresponds to the document object. Its documentElement property refers to the outer tag of the XML document. In the following document (example/fruit.xml), that would be the <fruits> tag:
+
+<fruits>
+  <fruit name="banana" color="yellow"/>
+  <fruit name="lemon" color="yellow"/>
+  <fruit name="cherry" color="red"/>
+</fruits>
+
+
+var req = new XMLHttpRequest();
+
+req.open("GET", "example/fruit.xml", false);
+
+req.send(null);
+
+console.log(req.responseXML.querySelectorAll("fruit").length);
+// → 3
+
+better idea to communicate using JSON data
+
+var req = new XMLHttpRequest();
+req.open("GET", "example/fruit.json", false);
+req.send(null);
+console.log(JSON.parse(req.responseText));
+// → {banana: "yellow", lemon: "yellow", cherry: "red"}
+
+
+Access-Control-Allow-Origin: *
+
+servers can include a header in their response to indicate that it is okay for the request to come from other domains:
+
+#####Abstracting request
+
+function backgroundReadFile(url, callback) {
+
+  var req = new XMLHttpRequest();
+
+  req.open("GET", url, true);
+
+  req.addEventListener("load", function() {
+
+    if (req.status < 400)
+
+      callback(req.responseText);
+
+  });
+
+  req.send(null);
+
+}
+
+the function makes it easier to use XMLHttpRequest for simple GET requests
+
+Tip:good idea to use a helper function so that you don’t end up repeating XMLHttpRequest pattern all through your code.
+
+---callback function is given to other code to provide that code with a way to “call us back” later.
+
+^only supports GET
+
+problem: handling of failure
+
+--request returns a status code thats an error (400+), it does nothing
+
+--if put a “loading” indicator on the page to indicate that we are fetching information
+
+--if request fails the page will sit there
+
+option to be notified when the request fails so that we can take appropriate action
+
+function getURL(url, callback) {
+  var req = new XMLHttpRequest();
+  req.open("GET", url, true);
+  req.addEventListener("load", function() {
+    if (req.status < 400)
+      callback(req.responseText);
+    else
+      callback(null, new Error("Request failed: " +
+                               req.statusText));
+  });
+  req.addEventListener("error", function() {
+    callback(null, new Error("Network error"));
+  });
+  req.send(null);
+}
+
+Code using getURL must then check whether an error was given and, if it finds one, handle it
+
+getURL("data/nonsense.txt", function(content, error) {
+
+  if (error != null)
+
+    console.log("Failed to fetch nonsense.txt: " + error);
+
+  else
+
+    console.log("nonsense.txt: " + content);
+
+});
+
+####Promises
+
+Promises wrap an asynchronous action in an object, which can be passed around and told to do certain things when the action finishes or fails
+
+promise object:
+
+---call the Promise constructor and give it a function that initializes the asynchronous action
+
+---he constructor calls that function, passing it two arguments, which are themselves functions
+
+---The first should be called when the action finishes successfully, and the second should be called when it fails.
+
+function get(url) {
+
+  return new Promise(function(succeed, fail) {
+
+    var req = new XMLHttpRequest();
+
+    req.open("GET", url, true);
+
+    req.addEventListener("load", function() {
+
+      if (req.status < 400)
+
+        succeed(req.responseText);
+
+      else
+
+        fail(new Error("Request failed: " + req.statusText));
+
+    });
+
+    req.addEventListener("error", function() {
+
+      fail(new Error("Network error"));
+
+    });
+
+    req.send(null);
+
+  });
+
+}
+
+Calling then produces a new promise
+
+####Security and https
+
+secure HTTP protocol-https:// wraps HTTP traffic in a way that makes it harder to read and tamper with
+
+#chapter 18
+
+####fields
+
+different styles-simple on/off checkboxes to drop-down menus and fields for text input.
+
+text	A single-line text field
+
+password	Same as text but hides the text that is typed
+
+checkbox	An on/off switch
+
+radio	(Part of) a multiple-choice field
+
+file	Allows the user to choose a file from their computer
+
+fields can not be submitted only forms can
+
+<p><input type="text" value="abc"> (text)</p>
+
+<p><input type="password" value="abc"> (password)</p>
+
+<p><input type="checkbox" checked> (checkbox)</p>
+
+<p><input type="radio" value="A" name="choice">
+   <input type="radio" value="B" name="choice" checked>
+   <input type="radio" value="C" name="choice"> (radio)</p>
+
+<p><input type="file"> (file)</p>
+
+Multiline text fields have their own tag, <textarea></textarea>
+
+<select> tag is used to create a field that allows the user to select from a number of predefined options.
+
+<select>
+  <option>Pancakes</option>
+  <option>Pudding</option>
+  <option>Ice cream</option>
+</select>
+
+"change"event-when value of form field changes
+
+####focus
+
+form fields can get keyboard focus
+
+---when clicked or activated they re a currently active element and the key board is focused to them
+
+focus: moves focus to the DOM element it is called on
+
+blur:removes focus
+
+document.activeElement is the focused element.
+
+<input type="text">
+
+<script>
+
+  document.querySelector("input").focus();
+
+  console.log(document.activeElement.tagName);
+
+  // → INPUT
+
+  document.querySelector("input").blur();
+
+  console.log(document.activeElement.tagName);
+
+  // → BODY
+
+</script>
+
+users can tab through fields, create that order by using
+
+<input type="text" tabindex=1> <a href=".">(help)</a>
+
+<button onclick="console.log('ok')" tabindex=2>OK</button>
+
+####Disabled fields
+
+all fields can be Disabled
+
+<button>I'm all right</button>
+<button disabled>I'm out</button>
+
+prevents user when clicking not to redo actions
+
+####forms
+
+The <form> element, in turn, has a property called elements that contains an array-like collection of the fields inside it.
+
+ways to acccess:
+
+ array-like object (accessible by number)
+
+  and a map (accessible by name).
+
+####Text Fields
+
+Input Tags
+
+--text
+
+--password
+
+--textarea
+
+value of DOM elements is the current content as a string
+
+setting property to another string changes the value to that string
+
+selectionStart & selectionEnd
+
+--give us information about the cursor and selection in the text
+
+when nothing is selected both are equal
+
+example:
+
+if i have sected from the beginning of text to 10nth character it will be 0 for start and 20 for end
+
+replaceSelection
+
+--replaces the currently selected part of a text field’s content
+
+shows current length of text
+
+<input type="text"> length: <span id="length">0</span>
+
+<script>
+
+  var text = document.querySelector("input");
+
+  var output = document.querySelector("#length");
+
+  text.addEventListener("input", function() {
+
+    output.textContent = text.value.length;
+
+  });
+
+</script>
+
+ changes everytime a types a character, deletes text, or otherwise manipulates the field’s content rather than when focused and unfocused
+
+####Checkboxes and radio buttons
+
+changes color of page to purple when clicked
+
+<input type="checkbox" id="purple">
+
+<label for="purple">Make this page purple</label>
+
+<script>
+
+  var checkbox = document.querySelector("#purple");
+
+  checkbox.addEventListener("change", function() {
+
+    document.body.style.background =
+
+      checkbox.checked ? "mediumpurple" : "";
+
+  });
+
+</script>
+
+<label> is used to associate a piece of text with an input field.
+
+Its for attribute should refer to the id of the field.
+
+Clicking the label will activate the field, which focuses it and toggles its value when it is a checkbox or radio button.
+
+radio button-linked to other radio buttons with the same name attribute so that only one of them can be active at any time.
+
+
+Color:
+
+
+<input type="radio" name="color" value="mediumpurple"> Purple
+
+<input type="radio" name="color" value="lightgreen"> Green
+
+<input type="radio" name="color" value="lightblue"> Blue
+
+<script>
+
+  var buttons = document.getElementsByName("color");
+
+  function setColor(event) {
+
+    document.body.style.background = event.target.value;
+
+  }
+
+  for (var i = 0; i < buttons.length; i++)
+
+    buttons[i].addEventListener("change", setColor);
+
+</script>
+
+--document.getElementsByName - all elements with a given name attribute
+
+####Select fields
+
+appearance is determined by the browser
+
+When given the multiple attribute, will allow the user to select any number of options, rather than just a single option
+
+--choose all that apply
+
+<select multiple>
+
+  <option>Pancakes</option>
+
+  <option>Pudding</option>
+
+  <option>Ice cream</option>
+
+</select>
+
+--size attribute:  used to set the number of options that are visible at the same time
+
+setting the size attribute to "3" will make the field show three lines, whether it has the multiple option enabled or not
+
+value property of a <select> element reflects the currently selected option
+
+a multiple field this property will give the value of only one of the currently selected options
+
+options property- accessed as an array-like object
+
+--selected- indicates whether that option is currently selected. can over ride selected or deselection here
+
+####file fields
+
+a way to upload files from the browser’s machine through a form
+
+provide a way to read such files from JavaScript programs
+
+acts as a gatekeeper
+
+browse is the most known example of this
+
+<input type="file">
+
+<script>
+
+  var input = document.querySelector("input");
+
+  input.addEventListener("change", function() {
+
+    if (input.files.length > 0) {
+
+      var file = input.files[0];
+
+      console.log("You chose", file.name);
+
+      if (file.type)
+
+        console.log("It has type", file.type);
+
+    }
+
+  });
+
+</script>
+
+--files - rray-like object containing the files chosen in the field.
+
+ initially empty.
+
+  also support a multiple attribute
+
+  Objects in the files property:
+
+  --- name (the filename)
+
+  ---size (the file’s size in bytes)
+
+  ---type (the media type of the file, such as text/plain or image/jpeg).
+
+!!!does not have is a property that contains the content of the file.!!!
+
+FileReader constructor as being similar to XMLHttpRequest but for files.
+
+<input type="file" multiple>
+
+<script>
+
+  var input = document.querySelector("input");
+
+  input.addEventListener("change", function() {
+
+    Array.prototype.forEach.call(input.files, function(file) {
+
+      var reader = new FileReader();
+
+      reader.addEventListener("load", function() {
+
+        console.log("File", file.name, "starts with",
+
+                    reader.result.slice(0, 20));
+
+      });
+
+      reader.readAsText(file);
+
+    });
+
+  });
+
+</script>
+
+explanation: Reading a file is done by creating a FileReader object, registering a "load" event handler for it, and calling its readAsText method, giving it the file we want to read. Once loading finishes, the reader’s result property contains the file’s content.
+
+can wrap in promise:
+
+function readFile(file) {
+
+  return new Promise(function(succeed, fail) {
+
+    var reader = new FileReader();
+
+    reader.addEventListener("load", function() {
+
+      succeed(reader.result);
+
+    });
+
+    reader.addEventListener("error", function() {
+
+      fail(reader.error);
+
+    });
+
+    reader.readAsText(file);
+
+  });
+
+}
+
+####Storing data client-side
+
+Sometimes it is enough to just keep the data in the browser. But how?
+
+localStorage object: store string data to not reload
+
+
+localStorage.setItem("username", "marijn");
+
+console.log(localStorage.getItem("username"));
+
+// → marijn
+
+localStorage.removeItem("username");
+
+localStorage sticks around until it is overwritten, it is removed with removeItem, or the user clears their local data.
+
+Notes: <select id="list"></select>
+<button onclick="addNote()">new</button><br>
+<textarea id="currentnote" style="width: 100%; height: 10em">
+</textarea>
+
+<script>
+  var list = document.querySelector("#list");
+  function addToList(name) {
+    var option = document.createElement("option");
+    option.textContent = name;
+    list.appendChild(option);
+  }
+
+  // Initialize the list from localStorage
+  var notes = JSON.parse(localStorage.getItem("notes")) ||
+              {"shopping list": ""};
+  for (var name in notes)
+    if (notes.hasOwnProperty(name))
+      addToList(name);
+
+  function saveToStorage() {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }
+
+  var current = document.querySelector("#currentnote");
+  current.value = notes[list.value];
+
+  list.addEventListener("change", function() {
+    current.value = notes[list.value];
+  });
+  current.addEventListener("change", function() {
+    notes[list.value] = current.value;
+    saveToStorage();
+  });
+
+  function addNote() {
+    var name = prompt("Note name", "");
+    if (!name) return;
+    if (!notes.hasOwnProperty(name)) {
+      notes[name] = "";
+      addToList(name);
+      saveToStorage();
+    }
+    list.value = name;
+    current.value = notes[name];
+  }
+</script>
+
+a simple note-taking application.
+
+It keeps the user’s notes as an object, associating note titles with content strings.
+
+This object is encoded as JSON and stored in localStorage. The user can select a note from a <select> field and change that note’s text in a <textarea>.
+
+ A note can be added by clicking a button.
+
+sessionStorage-content of sessionStorage is forgotten at the end of each session, which for most browsers means whenever the browser is closed.
+
+#Scopes and closures
+
+####Scope:
+
+where  variables are stored and how to find them
+
+####Compiler theory
+
+3 steps:
+
+1)Tokenizing/Lexing:
+
+2)Parsing:
+
+3)Code-Generation:
+
+####Conversation
+
+the cast:
+
+Engine: responsible for start-to-finish of JavaScript
+
+Compiler: one of Engine's friends; handles all the dirty work of parsing and code-generation
+
+Scope: another friend of Engine; collects and maintains a look-up list of all the declared identifiers (variables), and enforces a strict set of rules as to how these are accessible to currently executing code.
+
+back and forth:
+
+var a =2;
+
+engine sees 2 parts: complier will handle one and engine the other
+
+complier-prwforms Lexing tobreak down tokens var,a,=,2,; then parse into a tree but when it comes to code generation it will:
+
+encounter var a it ask scope if a already exist if so it ignores the var a part if not it declares a new variabe called a
+
+produces code a = 2 if a already exist it will replace a value with 2
+
+First, Compiler declares a variable (if not previously declared in the current scope), and second, when executing, Engine looks up the variable in Scope and assigns to it, if found.
+
+####compiler speak
+
+LHS RHS left hand side and right hand side of an assignment operation
+
+lhs looks for the container the value is stored in
+
+rhs anything other than container
+
+console.log( a );
+
+The reference to a is an RHS reference, because nothing is being assigned to a here. Instead, we're looking-up to retrieve the value of a, so that the value can be passed to console.log(..).
+
+a = 2;
+
+LHS reference, because we don't actually care what the current value is, we simply want to find the variable as a target for the = 2
+
+####Engine/scope Conversation
+
+Engine: Hey Scope, I have an RHS reference for foo. Ever heard of it?
+
+Scope: Why yes, I have. Compiler declared it just a second ago. He's a function. Here you go.
+
+Engine: Great, thanks! OK, I'm executing foo.
+
+Engine: Hey, Scope, I've got an LHS reference for a, ever heard of it?
+
+Scope: Why yes, I have. Compiler declared it as a formal parameter to foo just recently. Here you go.
+
+Engine: Helpful as always, Scope. Thanks again. Now, time to assign 2 to a.
+
+Engine: Hey, Scope, sorry to bother you again. I need an RHS look-up for console. Ever heard of it?
+
+Scope: No problem, Engine, this is what I do all day. Yes, I've got console. He's built-in. Here ya go.
+
+Engine: Perfect. Looking up log(..). OK, great, it's a function.
+
+Engine: Yo, Scope. Can you help me out with an RHS reference to a. I think I remember it, but just want to double-check.
+
+Scope: You're right, Engine. Same guy, hasn't changed. Here ya go.
+
+Engine: Cool. Passing the value of a, which is 2, into log(..).
+
+####Nested scopes
+
+usually more than one Scope  to consider
+
+Engine: "Hey, Scope of foo, ever heard of b? Got an RHS reference for it."
+
+Scope: "Nope, never heard of it. Go fish."
+
+Engine: "Hey, Scope outside of foo, oh you're the global Scope, ok cool. Ever heard of b? Got an RHS reference for it."
+
+Scope: "Yep, sure have. Here ya go."
+
+engine starts at the currently executing Scope, looks for the variable there, then if not found, keeps going up one level
+
+tall building enter front door
+
+####errors:
+
+two types of look-ups behave differently in the circumstance where the variable has not yet been declared
+
+####Lexical scope
+
+"scope" as the set of rules that govern how the Engine can look up a variable by its identifier name and find it
+
+lexing process examines a string of source code characters and assigns semantic meaning to the tokens as a result of some stateful parsing
+
+lexical scope is based on where variables and blocks of scope are authored, by you, at write time, and thus is (mostly) set in stone by the time the lexer processes your code.
+
+scopes are bubbles inside eachother
+
+####Lookups
+
+Scope look-up stops once it finds the first match
+
+Scope look-up stops once it finds the first match
+
+eval(..) function in JavaScript takes a string as an argument, and treats the contents of the string as if it had
+
+ actually been authored code at that point in the program
+
+ allows you to modify the lexical scope environment by cheating and pretending that author-time
+
+ with is typically explained as a short-hand for making multiple property references against an object without repeating the object reference itself each time.
+
+####Function vs block scope
+
+scope consists of a series of "bubbles" that each act as a container or bucket, in which identifiers (variables, functions) are declared.
+
+ These bubbles nest neatly inside each other, and this nesting is defined at author-time.
+
+ what makes a new bubble? Is it only the function? Can other structures in JavaScript create bubbles of scope?
+
+#####scope from functions
+
+function foo(a) {
+    var b = 2;
+
+    // some code
+
+    function bar() {
+        // ...
+    }
+
+    // more code
+
+    var c = 3;
+}
+
+scope: a, b, c and bar
+
+not accessible outside of foo(..)
+
+each function you declare creates a bubble for itself, but no other structures create their own scope bubbles
+
+!!!!you declare a function, and then add code inside it
